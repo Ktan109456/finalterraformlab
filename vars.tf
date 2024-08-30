@@ -1,9 +1,9 @@
 variable "websubnet" {
-  #default = "10.66.1.0/24"
-  validation {
-    condition     = can(regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", var.websubnet)) && !can(regex("^(10\\.|172\\.(1[6-9]|2[0-9]|3[0-1])\\.|192\\.168\\.)", var.websubnet))
-    error_message = "The IP address must not be a private IP address."
-  }
+  default = "10.66.1.0/24"
+  #validation {
+   # condition     = can(regex("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", var.websubnet)) && !can(regex("^(10\\.|172\\.(1[6-9]|2[0-9]|3[0-1])\\.|192\\.168\\.)", var.websubnet))
+    #error_message = "The IP address must not be a private IP address."
+  #}
 }
 
 variable "dbsubnet" {
@@ -17,9 +17,9 @@ variable "dbsubnet" {
 
 variable "ec2-env" {
   description = "Env in which the instance will be deployed,please input dev/test/prod in which env you want to spin the instance"
-  type = list
-  default = ["dev","test","prod"]
-  nullable = false
+  type        = list(any)
+  default     = ["dev", "test", "prod"]
+  nullable    = false
 
 
 }
@@ -43,17 +43,8 @@ variable "ec2-instance-region" {
 
 }
 
-
-variable "httpport" {
-  type    = number
-  default = 80
-
-
-}
-
-variable "sshport" {
-  type    = number
-  default = 22
-
-
+variable "ec2bucket" {
+    default = "user5bucket"
+    description = "variable for the s3bucket"
+    
 }
