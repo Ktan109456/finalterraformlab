@@ -1,32 +1,9 @@
-PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform init
-Initializing the backend...
-Initializing modules...
-- compute in ec2
-- network in vpc
-- s3bucket in s3
-Initializing provider plugins...
-- Finding hashicorp/aws versions matching "~> 5.0"...
-- Installing hashicorp/aws v5.65.0...
-- Installed hashicorp/aws v5.65.0 (signed by HashiCorp)
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-
-Terraform has been successfully initialized!
-
-You may now begin working with Terraform. Try running "terraform plan" to see
-any changes that are required for your infrastructure. All Terraform commands
-should now work.
-
-If you ever set or change modules or backend configuration for Terraform,
-rerun this command to reinitialize your working directory. If you forget, other
-commands will detect it and remind you to do so if necessary.
 PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform validate
 ╷
 │ Error: Reference to undeclared resource
 │
 │   on ec2\ec2.tf line 5, in resource "aws_instance" "ec2ins":
-│    5:   subnet_id = aws_subnet.var.websunet.id
+│    5:   subnet_id = aws_subnet.var.websubnet.id
 │
 │ A managed resource "aws_subnet" "var" has not been declared in module.compute.
 ╵
@@ -123,15 +100,15 @@ PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform validate
 │  128:     cidr_block = var.websubnet
 │
 │ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
-│ variable "websubnet" {} block.
-╵
-╷
-│ Error: Reference to undeclared input variable
-│
 │   on vpc\vpc.tf line 137, in resource "aws_network_acl" "ingress-ssh-acl":
 │  137:     cidr_block = var.websubnet
 │
 │ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
 │ variable "websubnet" {} block.
 ╵
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
 PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> 
