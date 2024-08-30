@@ -1,30 +1,137 @@
-PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
-PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform plan
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform init
+Initializing the backend...
+Initializing modules...
+- compute in ec2
+- network in vpc
+- s3bucket in s3
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "~> 5.0"...
+- Installing hashicorp/aws v5.65.0...
+- Installed hashicorp/aws v5.65.0 (signed by HashiCorp)
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform validate
 ╷
-│ Error: Module not installed
+│ Error: Reference to undeclared resource
 │
-│   on main.tf line 1:
-│    1: module "compute" {
+│   on ec2\ec2.tf line 5, in resource "aws_instance" "ec2ins":
+│    5:   subnet_id = aws_subnet.var.websunet.id
 │
-│ This module is not yet installed. Run "terraform init" to install all modules required by this
-│ configuration.
+│ A managed resource "aws_subnet" "var" has not been declared in module.compute.
 ╵
 ╷
-│ Error: Module not installed
+│ Error: Reference to undeclared resource
 │
-│   on main.tf line 10:
-│   10: module "network" {
+│   on ec2\ec2.tf line 6, in resource "aws_instance" "ec2ins":
+│    6:   vpc_security_group_ids = [ aws_security_group.SG_user5.id ]
 │
-│ This module is not yet installed. Run "terraform init" to install all modules required by this
-│ configuration.
+│ A managed resource "aws_security_group" "SG_user5" has not been declared in module.compute.
 ╵
 ╷
-│ Error: Module not installed
+│ Error: Reference to undeclared input variable
 │
-│   on main.tf line 17:
-│   17: module "s3bucket" {
+│   on s3\s3bucket.tf line 3, in resource "aws_s3_bucket" "user5bucket":
+│    3:     bucket = var.ec2bucket
 │
-│ This module is not yet installed. Run "terraform init" to install all modules required by this
-│ configuration.
+│ An input variable with the name "ec2bucket" has not been declared. This variable can be declared with a      
+│ variable "ec2bucket" {} block.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on s3\s3bucket.tf line 14, in resource "aws_s3_bucket_object" "user5-folder":
+│   14:    bucket = var.ec2bucket.id
+│
+│ An input variable with the name "ec2bucket" has not been declared. This variable can be declared with a      
+│ variable "ec2bucket" {} block.
+╵
+╷
+│ Error: Reference to undeclared resource
+│
+│   on s3\s3bucket.tf line 19, in output "ec2buckettagout":
+│   19:   value = aws_s3_bucket.petstorebucket.tags
+│
+│ A managed resource "aws_s3_bucket" "petstorebucket" has not been declared in module.s3bucket.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 11, in resource "aws_subnet" "publicsubnet":
+│   11:   cidr_block                      = var.websubnet
+│
+│ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
+│ variable "websubnet" {} block.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 22, in resource "aws_subnet" "internalsubnet":
+│   22:   cidr_block                      = var.dbsubnet
+│
+│ An input variable with the name "dbsubnet" has not been declared. This variable can be declared with a       
+│ variable "dbsubnet" {} block.
+╵
+╷
+│ Error: Reference to undeclared resource
+│
+│   on vpc\vpc.tf line 56, in resource "aws_route_table" "RT_dbsubnet":
+│   56:     network_interface_id = aws_network_interface.user5vpc.id
+│
+│ A managed resource "aws_network_interface" "user5vpc" has not been declared in module.network.
+╵
+╷
+│ Error: Reference to undeclared resource
+│
+│   on vpc\vpc.tf line 72, in resource "aws_route_table" "RT_websubnet":
+│   72:     network_interface_id = aws_network_interface.user5vpc.id
+│
+│ A managed resource "aws_network_interface" "user5vpc" has not been declared in module.network.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 101, in resource "aws_network_acl" "ingress-http-acl":
+│  101:     cidr_block = var.websubnet
+│
+│ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
+│ variable "websubnet" {} block.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 110, in resource "aws_network_acl" "ingress-http-acl":
+│  110:     cidr_block = var.websubnet
+│
+│ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
+│ variable "websubnet" {} block.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 128, in resource "aws_network_acl" "ingress-ssh-acl":
+│  128:     cidr_block = var.websubnet
+│
+│ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
+│ variable "websubnet" {} block.
+╵
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on vpc\vpc.tf line 137, in resource "aws_network_acl" "ingress-ssh-acl":
+│  137:     cidr_block = var.websubnet
+│
+│ An input variable with the name "websubnet" has not been declared. This variable can be declared with a      
+│ variable "websubnet" {} block.
 ╵
 PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> 
