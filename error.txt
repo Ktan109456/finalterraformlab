@@ -1,0 +1,30 @@
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab>
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> terraform plan
+╷
+│ Error: Module not installed
+│
+│   on main.tf line 1:
+│    1: module "compute" {
+│
+│ This module is not yet installed. Run "terraform init" to install all modules required by this
+│ configuration.
+╵
+╷
+│ Error: Module not installed
+│
+│   on main.tf line 10:
+│   10: module "network" {
+│
+│ This module is not yet installed. Run "terraform init" to install all modules required by this
+│ configuration.
+╵
+╷
+│ Error: Module not installed
+│
+│   on main.tf line 17:
+│   17: module "s3bucket" {
+│
+│ This module is not yet installed. Run "terraform init" to install all modules required by this
+│ configuration.
+╵
+PS C:\Users\Administrator\Downloads\K-LAB\finalterraformlab> 
