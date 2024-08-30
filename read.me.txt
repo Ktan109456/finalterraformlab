@@ -1,0 +1,6 @@
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add terraformlab https://github.com/Ktan109456/finalterraformlab.git
+git push -u terraformlab main
